@@ -1,3 +1,6 @@
+*.txt
+*.txt.meta
+
 # Unity generated
 /[Ll]ibrary/
 /[Tt]emp/
