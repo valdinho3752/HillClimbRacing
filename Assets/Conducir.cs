@@ -7,8 +7,9 @@ public class Conducir : MonoBehaviour
     public WheelJoint2D ruedaDelantera;
     public WheelJoint2D ruedaTrasera;
     public float velocidad = 650;
+    //public float anguloGiro = 2f; // Ángulo de giro del auto
 
-    private Coroutine reduccionCorutina;
+
 
     // Start is called before the first frame update
     void Start()
@@ -26,6 +27,7 @@ public class Conducir : MonoBehaviour
         //Control de la flecha izquierda
         if (Input.GetKeyDown(KeyCode.LeftArrow))
         {
+            //GirarAuto(-anguloGiro);
             CambiarVelocidadRueda(ruedaDelantera, velocidad);
             CambiarVelocidadRueda(ruedaTrasera, velocidad);
         }
@@ -41,6 +43,7 @@ public class Conducir : MonoBehaviour
         //Control de la flecha derecha
         if (Input.GetKeyDown(KeyCode.RightArrow))
         {
+            //GirarAuto(anguloGiro);
             CambiarVelocidadRueda(ruedaDelantera, -velocidad);
             CambiarVelocidadRueda(ruedaTrasera, -velocidad);
         }
@@ -59,5 +62,12 @@ public class Conducir : MonoBehaviour
         JointMotor2D motor = rueda.motor;
         motor.motorSpeed = nuevaVelocidad;
         rueda.motor = motor;
+    }
+
+    private void GirarAuto(float angulo)
+    {
+        Quaternion rotacion = transform.rotation;
+        rotacion *= Quaternion.Euler(0f, 0f, angulo);
+        transform.rotation = rotacion;
     }
 }
